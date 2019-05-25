@@ -146,8 +146,7 @@ class Flow:
         # task_data is a list of tuples (node, task_id, parent_task_id, has_chilren)
         tasks_data = []
 
-        for i in range(len(tsort)):
-            node = tsort[i]
+        for i, node in enumerate(tsort):
             if isinstance(node, ProducerNode):
                 task_data = (node, i, None, i < (len(tsort) - 1))
             elif isinstance(node, ProcessorNode):

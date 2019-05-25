@@ -14,7 +14,6 @@ from ..core.environment import ExecutionEnvironment, Messenger
 from ..utils.system import get_number_of_gpus
 from ..core.constants import STOP_SIGNAL
 
-import logging
 
 def task_executor_fn(task : Task):
     task.run()

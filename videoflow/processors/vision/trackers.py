@@ -101,7 +101,7 @@ def associate_detections_to_trackers(detections, trackers, metric_function, iou_
     """
     distance_threshold = 500
 
-    if len(trackers) == 0:
+    if not trackers:
         return np.empty((0, 2), dtype = int), np.arange(len(detections)), np.empty((0, 5), dtype = int)
     iou_matrix = np.zeros((len(detections), len(trackers)), dtype=np.float32)
 
@@ -128,7 +128,7 @@ def associate_detections_to_trackers(detections, trackers, metric_function, iou_
             unmatched_trackers.append(m[1])
         else:
             matches.append(m.reshape(1, 2))
-    if len(matches) == 0:
+    if not matches:
         matches = np.empty((0, 2), dtype = int)
     else:
         matches = np.concatenate(matches, axis = 0)
@@ -274,7 +274,7 @@ class KalmanFilterBoundingBoxTracker(BoundingBoxTracker):
             #remove dead tracklet
             if(trk.time_since_update > self.max_age):
                 self.trackers.pop(i)
-        if(len(ret) > 0):
+        if ret:
             return np.concatenate(ret)
         
         self.previous_fid = fid
